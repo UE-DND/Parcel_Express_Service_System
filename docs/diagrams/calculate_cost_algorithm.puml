@@ -1,0 +1,42 @@
+@startuml 包裹费用计算算法流程图
+
+skinparam backgroundColor white
+skinparam handwritten false
+skinparam defaultFontName Microsoft YaHei
+skinparam defaultFontSize 14
+skinparam roundCorner 10
+skinparam shadowing false
+
+skinparam activity {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  FontColor #000000
+  ArrowColor #000000
+}
+
+start
+
+:获取包裹对象;
+
+if (包裹类型?) then (普通包裹)
+  :获取包裹重量;
+  :获取每盎司基本运费;
+  :计算总费用 = 重量 × 基本运费;
+elseif (包裹类型?) then (隔日达包裹)
+  :获取包裹重量;
+  :获取每盎司基本运费;
+  :获取额外统一费用;
+  :计算基本费用 = 重量 × 基本运费;
+  :计算总费用 = 基本费用 + 额外统一费用;
+else (隔夜达包裹)
+  :获取包裹重量;
+  :获取每盎司基本运费;
+  :获取每盎司额外费用;
+  :计算总费用 = 重量 × (基本运费 + 每盎司额外费用);
+endif
+
+:返回总费用;
+
+stop
+
+@enduml 

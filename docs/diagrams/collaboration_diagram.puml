@@ -1,0 +1,56 @@
+@startuml 包裹快递服务系统协作图
+
+skinparam backgroundColor white
+skinparam handwritten false
+skinparam defaultFontName Microsoft YaHei
+skinparam defaultFontSize 14
+skinparam roundCorner 10
+skinparam shadowing false
+
+skinparam object {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  FontColor #000000
+}
+
+object "用户" as user
+object "ParcelExpressSystem" as main
+object "MenuDisplay" as menu
+object "InputHandler" as input
+object "PackageManager" as manager
+object "PackageInfoDisplay" as display
+object "Package" as package
+object "TwoDayPackage" as twoDay
+object "OvernightPackage" as overnight
+object "ParcelContact" as contact
+
+user -right-> main : "1: 启动系统"
+user -right-> main : "4: 选择菜单选项"
+
+main -down-> menu : "2: displayMainMenu()"
+main -down-> input : "5: getUserChoice(scanner)"
+main -down-> manager : "6: 根据选择调用对应方法"
+
+manager -right-> menu : "7: 显示相关菜单"
+manager -right-> input : "8: 获取用户输入"
+manager -down-> package : "12: 创建普通包裹"
+manager -down-> twoDay : "13: 创建隔日达包裹"
+manager -down-> overnight : "14: 创建隔夜达包裹"
+manager -left-> display : "15: printShippingOrderInfo()"
+
+input -down-> contact : "9: 创建联系人对象"
+
+package -left-> contact : "3: 关联发件人和收件人"
+twoDay -up-> package : "10: 继承"
+overnight -up-> package : "11: 继承"
+
+note bottom of manager
+  协作过程:
+  1. 用户启动系统
+  2. 系统显示主菜单
+  3. 用户选择操作
+  4. 系统根据选择执行相应功能
+  5. 创建、显示或管理包裹对象
+end note
+
+@enduml 

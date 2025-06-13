@@ -1,0 +1,170 @@
+@startuml 包裹快递服务系统时序图
+
+skinparam backgroundColor white
+skinparam handwritten false
+skinparam defaultFontName Microsoft YaHei
+skinparam defaultFontSize 14
+skinparam roundCorner 10
+skinparam shadowing false
+
+skinparam sequence {
+  ArrowColor #000000
+  ActorBorderColor #000000
+  LifeLineBorderColor #000000
+  LifeLineBackgroundColor #FFFFFF
+  ParticipantBorderColor #000000
+  ParticipantBackgroundColor #FFFFFF
+  ParticipantFontColor #000000
+  ActorBackgroundColor #FFFFFF
+  ActorFontColor #000000
+}
+
+actor 用户
+participant "ParcelExpressSystem" as Main
+participant "MenuDisplay" as Menu
+participant "InputHandler" as Input
+participant "PackageManager" as Manager
+participant "PackageInfoDisplay" as Display
+participant "Package" as Package
+participant "TwoDayPackage" as TwoDay
+participant "OvernightPackage" as Overnight
+participant "ParcelContact" as Contact
+
+== 系统启动 ==
+用户 -> Main: 启动系统
+activate Main
+Main -> Menu: displayMainMenu()
+activate Menu
+Menu --> Main: 显示主菜单
+deactivate Menu
+
+== 添加包裹流程 ==
+用户 -> Main: 选择1(添加包裹)
+Main -> Input: getUserChoice(scanner)
+activate Input
+Input --> Main: 返回选择(1)
+deactivate Input
+
+Main -> Manager: addPackage(packages, scanner)
+activate Manager
+Manager -> Menu: displayAddPackageMenu()
+activate Menu
+Menu --> Manager: 显示添加包裹菜单
+deactivate Menu
+
+Manager -> Input: getUserChoice(scanner)
+activate Input
+Input --> Manager: 返回包裹类型选择
+deactivate Input
+
+Manager -> Input: getContactInfo(scanner)
+activate Input
+Input -> Contact: new ParcelContact(...)
+activate Contact
+Contact --> Input: 返回发件人对象
+deactivate Contact
+Input --> Manager: 返回发件人信息
+deactivate Input
+
+Manager -> Input: getContactInfo(scanner)
+activate Input
+Input -> Contact: new ParcelContact(...)
+activate Contact
+Contact --> Input: 返回收件人对象
+deactivate Contact
+Input --> Manager: 返回收件人信息
+deactivate Input
+
+Manager -> Input: getPositiveDoubleInput(scanner, "请输入包裹重量(盎司): ")
+activate Input
+Input --> Manager: 返回包裹重量
+deactivate Input
+
+alt 普通包裹
+  Manager -> Package: new Package(sender, recipient, weight)
+  activate Package
+  Package --> Manager: 返回包裹对象
+  deactivate Package
+else 隔日达包裹
+  Manager -> Input: getPositiveDoubleInput(scanner, "请输入额外统一费用: ")
+  activate Input
+  Input --> Manager: 返回额外费用
+  deactivate Input
+  Manager -> TwoDay: new TwoDayPackage(sender, recipient, weight, flatFee)
+  activate TwoDay
+  TwoDay --> Manager: 返回隔日达包裹对象
+  deactivate TwoDay
+else 隔夜达包裹
+  Manager -> Input: getPositiveDoubleInput(scanner, "请输入每盎司额外费用: ")
+  activate Input
+  Input --> Manager: 返回每盎司额外费用
+  deactivate Input
+  Manager -> Overnight: new OvernightPackage(sender, recipient, weight, overnightFee)
+  activate Overnight
+  Overnight --> Manager: 返回隔夜达包裹对象
+  deactivate Overnight
+end
+
+Manager -> Display: printShippingOrderInfo(newPackage)
+activate Display
+Display --> Manager: 显示包裹信息
+deactivate Display
+Manager --> Main: 返回主菜单
+deactivate Manager
+
+== 查看包裹信息流程 ==
+用户 -> Main: 选择2(查看包裹)
+Main -> Input: getUserChoice(scanner)
+activate Input
+Input --> Main: 返回选择(2)
+deactivate Input
+
+Main -> Manager: displayAllPackages(packages, scanner)
+activate Manager
+Manager -> Menu: displayPackageListHeader(packages.size())
+activate Menu
+Menu --> Manager: 显示包裹列表头部
+deactivate Menu
+
+loop 对每个包裹
+  Manager -> Display: printShippingOrderInfo(package)
+  activate Display
+  Display --> Manager: 显示包裹信息
+  deactivate Display
+end
+Manager --> Main: 返回主菜单
+deactivate Manager
+
+== 查看订单统计流程 ==
+用户 -> Main: 选择3(查看订单统计)
+Main -> Input: getUserChoice(scanner)
+activate Input
+Input --> Main: 返回选择(3)
+deactivate Input
+
+Main -> Manager: displayTotalOrders(scanner)
+activate Manager
+Manager -> Package: getNumberOfShippingOrder()
+activate Package
+Package --> Manager: 返回订单总数
+deactivate Package
+Manager -> Menu: displayOrderStatistics(orderCount)
+activate Menu
+Menu --> Manager: 显示订单统计信息
+deactivate Menu
+Manager --> Main: 返回主菜单
+deactivate Manager
+
+
+
+== 退出系统 ==
+用户 -> Main: 选择4(退出系统)
+Main -> Input: getUserChoice(scanner)
+activate Input
+Input --> Main: 返回选择(4)
+deactivate Input
+Main -> Main: scanner.close()
+Main --> 用户: 系统退出
+deactivate Main
+
+@enduml

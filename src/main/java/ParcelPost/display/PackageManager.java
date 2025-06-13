@@ -140,45 +140,5 @@ public class PackageManager {
         }
     }
     
-    /**
-     * 使用测试用例
-     * 
-     * @param packages 包裹列表
-     * @param scanner 输入流
-     */
-    public static void addTestCases(ArrayList<Package> packages, Scanner scanner) {
-        try {
-            MenuDisplay.displayTestCaseMenu();
-            
-            // 包裹1: 普通包裹
-            ParcelContact sender1 = new ParcelContact("LeBron James", "#23 Main St", "Cleveland", "Ohio", "11111", "(+86)139-1111-1111");
-            ParcelContact recipient1 = new ParcelContact("Dirk Nowitzki", "#41 Waterview Pkwy", "Dallas", "Texas", "22222", "(+86)139-2222-2222");
-            Package package1 = new Package(sender1, recipient1, 3.02);
-            packages.add(package1);
-            System.out.println(MenuDisplay.GREEN + " ✓ " + MenuDisplay.WHITE + "已添加测试用例 1: 普通包裹" + MenuDisplay.RESET);
 
-            // 包裹2: 隔日达包裹
-            ParcelContact sender2 = new ParcelContact("Kobe Bryant", "#24 Broadway", "Los Angeles", "California", "33333", "(+86)139-3333-3333");
-            ParcelContact recipient2 = new ParcelContact("Michael Jordan", "#23 King Rd", "Chicago", "Illinois", "44444", "(+86)139-4444-4444");
-            TwoDayPackage package2 = new TwoDayPackage(sender2, recipient2, 12.28, 5.5);
-            packages.add(package2);
-            System.out.println(MenuDisplay.GREEN + " ✓ " + MenuDisplay.WHITE + "已添加测试用例 2: 隔日达包裹" + MenuDisplay.RESET);
-            
-            // 包裹3: 隔夜达包裹
-            ParcelContact sender3 = new ParcelContact("James Harden", "#13 Oak St", "Houston", "Texas", "55555", "(+86)139-5555-5555");
-            ParcelContact recipient3 = new ParcelContact("Stephen Curry", "#30 Cambridge Rd", "San Francisco", "California", "66666", "(+86)139-6666-6666");
-            OvernightPackage package3 = new OvernightPackage(sender3, recipient3, 11.24, 0.75);
-            packages.add(package3);
-            System.out.println(MenuDisplay.GREEN + " ✓ " + MenuDisplay.WHITE + "已添加测试用例 3: 隔夜送达包裹" + MenuDisplay.RESET);
-            
-            System.out.println(MenuDisplay.GREEN + "\n ✓ " + MenuDisplay.YELLOW + MenuDisplay.BOLD + "成功添加所有测试用例！" + MenuDisplay.RESET);
-            System.out.print(MenuDisplay.YELLOW + "\n按回车键继续..." + MenuDisplay.RESET);
-            scanner.nextLine();
-        } catch (Exception e) {
-            System.out.println(MenuDisplay.RED + " ⚠️ 添加测试用例时发生未知错误: " + MenuDisplay.YELLOW + e.getMessage() + MenuDisplay.RESET);
-            System.out.println(MenuDisplay.RED + " ⚠️ 系统已退出" + MenuDisplay.RESET);
-            scanner.close();
-            System.exit(1);
-        }
-    }
 }

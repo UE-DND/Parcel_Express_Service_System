@@ -50,20 +50,16 @@ public class ParcelExpressSystem {
                         showMenu = true;
                         break;
                     case 4:
-                        PackageManager.addTestCases(packages, scanner);
-                        showMenu = true;
-                        break;
-                    case 5:
                         System.out.println(MenuDisplay.GREEN + " ✓ " + MenuDisplay.YELLOW + "系统已退出" + MenuDisplay.RESET);
                         isRunning = false;
                         break;
                     default:
-                        System.out.print(MenuDisplay.RED + " ❌ 无效选择！" + MenuDisplay.YELLOW + "请输入一个有效的数字 " + MenuDisplay.GREEN + MenuDisplay.BOLD + "(1-5)" + MenuDisplay.RESET + MenuDisplay.YELLOW + ": " + MenuDisplay.RESET);
+                        System.out.print(MenuDisplay.RED + " ❌ 无效选择！" + MenuDisplay.YELLOW + "请输入一个有效的数字 " + MenuDisplay.GREEN + MenuDisplay.BOLD + "(1-4)" + MenuDisplay.RESET + MenuDisplay.YELLOW + ": " + MenuDisplay.RESET);
                 }
             } catch (Exception e) {
                 if (runtimes < 3) {
                     System.out.println(MenuDisplay.RED + " ⚠️ 发生未知错误: " + MenuDisplay.YELLOW + e.getMessage() + MenuDisplay.RESET);
-                    System.out.print(MenuDisplay.YELLOW + " 尝试重新输入选择 " + MenuDisplay.GREEN + MenuDisplay.BOLD + "(1-5)" + MenuDisplay.RESET + MenuDisplay.YELLOW + ": " + MenuDisplay.RESET);
+                    System.out.print(MenuDisplay.YELLOW + " 尝试重新输入选择 " + MenuDisplay.GREEN + MenuDisplay.BOLD + "(1-4)" + MenuDisplay.RESET + MenuDisplay.YELLOW + ": " + MenuDisplay.RESET);
                     runtimes++;
                 } else if(runtimes >= 3 && totalruntimes >= 2) {  // 共计出现 3次异常或此处连续出现 2次异常后退出
                     System.out.println(MenuDisplay.RED + " ⚠️ 重试次数过多，系统已自动退出" + MenuDisplay.RESET);
