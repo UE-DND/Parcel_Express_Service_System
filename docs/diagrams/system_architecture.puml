@@ -1,0 +1,137 @@
+@startuml 包裹快递服务系统架构图
+
+skinparam backgroundColor white
+skinparam handwritten false
+skinparam defaultFontName Microsoft YaHei
+skinparam defaultFontSize 14
+skinparam roundCorner 10
+skinparam shadowing false
+
+!define RECTANGLE class
+
+skinparam package {
+  BackgroundColor #EEEEEE
+  BorderColor #000000
+  FontColor #000000
+}
+
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  FontColor #000000
+}
+
+package "Maven项目: parcel-express-service-system" {
+  package "src/main/java" {
+    package "ParcelPost" {
+      package "模型层 (Model)" {
+        class Package {
+          - sender: ParcelContact
+          - recipient: ParcelContact
+          - packageWeight: double
+          + calculateCost(): double
+        }
+        
+        class TwoDayPackage {
+          - flatFlee: double
+          + calculateCost(): double
+        }
+        
+        class OvernightPackage {
+          - overnightFeePerOunce: double
+          + calculateCost(): double
+        }
+        
+        class ParcelContact {
+          - name: String
+          - address: String
+          - city: String
+          - state: String
+          - postcode: String
+          - phoneNumber: String
+        }
+        
+        TwoDayPackage -up-|> Package
+        OvernightPackage -up-|> Package
+        Package o-- "2" ParcelContact
+      }
+      
+      package "显示层 (Display)" {
+        class MenuDisplay {
+          + displayMainMenu()
+          + displayAddPackageMenu()
+          + displayTestCaseMenu()
+          + displayPackageListHeader()
+          + displayOrderStatistics()
+        }
+        
+        class PackageInfoDisplay {
+          + printShippingOrderInfo()
+        }
+        
+        class InputHandler {
+          + getUserChoice()
+          + getContactInfo()
+          + getPositiveDoubleInput()
+        }
+        
+        class PackageManager {
+          + addPackage()
+          + displayAllPackages()
+          + displayTotalOrders()
+          + addTestCases()
+        }
+      }
+      
+      class ParcelExpressSystem {
+        - packages: ArrayList<Package>
+        + main()
+      }
+    }
+  }
+
+  package "src/test/java" {
+    package "ParcelPost.test" {
+      class PackageTest {
+        + testCalculateCost()
+        + testConstructor()
+      }
+      
+      class ParcelContactTest {
+        + testConstructor()
+      }
+      
+      class ParcelServiceTest {
+        + testSystemFlow()
+      }
+      
+      class PrintUtil {
+        + printTestHeader()
+      }
+    }
+  }
+  
+  ParcelExpressSystem --> MenuDisplay : 使用
+  ParcelExpressSystem --> PackageManager : 使用
+  ParcelExpressSystem --> InputHandler : 使用
+  PackageManager --> Package : 创建和管理
+  PackageManager --> TwoDayPackage : 创建和管理
+  PackageManager --> OvernightPackage : 创建和管理
+  PackageManager --> PackageInfoDisplay : 使用
+  PackageManager --> InputHandler : 使用
+  InputHandler --> ParcelContact : 创建
+  
+  PackageTest ..> Package : 测试
+  ParcelContactTest ..> ParcelContact : 测试
+  ParcelServiceTest ..> ParcelExpressSystem : 测试
+}
+
+note right of "Maven项目: parcel-express-service-system"
+  使用Maven管理的标准项目结构
+  - pom.xml: 项目配置和依赖管理
+  - src/main/java: 主要源代码
+  - src/test/java: 测试代码
+  - target: 构建输出目录
+end note
+
+@enduml 

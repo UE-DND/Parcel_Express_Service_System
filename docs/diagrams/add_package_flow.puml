@@ -1,0 +1,47 @@
+@startuml 添加包裹流程图
+
+skinparam backgroundColor white
+skinparam handwritten false
+skinparam defaultFontName Microsoft YaHei
+skinparam defaultFontSize 14
+skinparam roundCorner 10
+skinparam shadowing false
+
+skinparam activity {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  FontColor #000000
+  ArrowColor #000000
+}
+
+start
+:显示添加包裹菜单;
+:获取用户选择的包裹类型;
+
+if (包裹类型有效?) then (是)
+  :获取发件人信息;
+  :获取收件人信息;
+  :获取包裹重量;
+  
+  if (包裹类型) then (普通包裹)
+    :创建普通包裹对象;
+  elseif (包裹类型) then (隔日达包裹)
+    :获取额外统一费用;
+    :创建隔日达包裹对象;
+  else (隔夜达包裹)
+    :获取每盎司额外费用;
+    :创建隔夜达包裹对象;
+  endif
+  
+  :将包裹添加到包裹列表;
+  :显示包裹信息;
+  :等待用户确认;
+else (否)
+  :显示错误信息;
+endif
+
+:返回主菜单;
+
+stop
+
+@enduml 

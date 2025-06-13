@@ -1,0 +1,186 @@
+@startuml 包裹快递服务系统类图
+
+skinparam backgroundColor white
+skinparam handwritten false
+skinparam defaultFontName Microsoft YaHei
+skinparam defaultFontSize 14
+skinparam roundCorner 10
+skinparam shadowing false
+
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #000000
+  FontColor #000000
+  AttributeFontColor #000000
+  AttributeFontSize 12
+  AttributeIconSize 12
+}
+
+skinparam note {
+  BackgroundColor #FFFACD
+  BorderColor #000000
+}
+
+title Maven项目: parcel-express-service-system - 类图
+
+package "src.main.java.ParcelPost.model" {
+  class Package {
+    - sender: ParcelContact
+    - recipient: ParcelContact
+    - packageWeight: double
+    + {static} COST_PER_OUNCE: double = 1.16
+    - {static} numberOfShippingOrder: int
+    + Package(sender: ParcelContact, recipient: ParcelContact, packageWeight: double)
+    + getSender(): ParcelContact
+    + setSender(sender: ParcelContact): void
+    + getRecipient(): ParcelContact
+    + setRecipient(recipient: ParcelContact): void
+    + getPackageWeight(): double
+    + setPackageWeight(packageWeight: double): void
+    + {static} getNumberOfShippingOrder(): int
+    + calculateCost(): double
+  }
+  
+  class TwoDayPackage {
+    - flatFlee: double
+    + TwoDayPackage(sender: ParcelContact, recipient: ParcelContact, packageWeight: double, flatFlee: double)
+    + getFlatFlee(): double
+    + setFlatFlee(flatFlee: double): void
+    + calculateCost(): double
+  }
+  
+  class OvernightPackage {
+    - overnightFeePerOunce: double
+    + OvernightPackage(sender: ParcelContact, recipient: ParcelContact, packageWeight: double, overnightFeePerOunce: double)
+    + getOvernightFeePerOunce(): double
+    + setOvernightFeePerOunce(overnightFeePerOunce: double): void
+    + calculateCost(): double
+  }
+  
+  class ParcelContact {
+    - name: String
+    - address: String
+    - city: String
+    - state: String
+    - postcode: String
+    - phoneNumber: String
+    + ParcelContact(name: String, address: String, city: String, state: String, postcode: String, phoneNumber: String)
+    + getName(): String
+    + setName(name: String): void
+    + getAddress(): String
+    + setAddress(address: String): void
+    + getCity(): String
+    + setCity(city: String): void
+    + getState(): String
+    + setState(state: String): void
+    + getPostcode(): String
+    + setPostcode(postcode: String): void
+    + getPhoneNumber(): String
+    + setPhoneNumber(phoneNumber: String): void
+  }
+}
+
+package "src.main.java.ParcelPost.display" {
+  class MenuDisplay {
+    + {static} RESET: String
+    + {static} BOLD: String
+    + {static} RED: String
+    + {static} GREEN: String
+    + {static} YELLOW: String
+    + {static} CYAN: String
+    + {static} WHITE: String
+    + {static} displayMainMenu(): void
+    + {static} displayAddPackageMenu(): void
+    + {static} displayTestCaseMenu(): void
+    + {static} displayPackageListHeader(packageCount: int): void
+    - {static} displayEmptyPackageList(): void
+    - {static} displayNonEmptyPackageList(packageCount: int): void
+    + {static} displayOrderStatistics(orderCount: int): void
+    + {static} clearScreen(): void
+  }
+  
+  class PackageInfoDisplay {
+    + {static} printShippingOrderInfo(p: Package): void
+  }
+  
+  class InputHandler {
+    + {static} getUserChoice(scanner: Scanner): int
+    + {static} getContactInfo(scanner: Scanner): ParcelContact
+    - {static} getValidInput(scanner: Scanner, fieldName: String, errorMessage: String): String
+    + {static} getPositiveDoubleInput(scanner: Scanner, prompt: String): double
+  }
+  
+  class PackageManager {
+    + {static} addPackage(packages: ArrayList<Package>, scanner: Scanner): void
+    + {static} displayAllPackages(packages: ArrayList<Package>, scanner: Scanner): void
+    + {static} displayTotalOrders(scanner: Scanner): void
+    + {static} addTestCases(packages: ArrayList<Package>, scanner: Scanner): void
+  }
+}
+
+package "src.main.java.ParcelPost" {
+  class ParcelExpressSystem {
+    - {static} packages: ArrayList<Package>
+    - {static} scanner: Scanner
+    + {static} main(args: String[]): void
+  }
+}
+
+package "src.test.java.ParcelPost" {
+  class PackageTest {
+    + testCalculateCost()
+    + testConstructor()
+    + testNumberOfShippingOrder()
+  }
+  
+  class ParcelContactTest {
+    + testConstructor()
+    + testGettersAndSetters()
+  }
+  
+  class ParcelServiceTest {
+    + testSystemFlow()
+  }
+  
+  class PrintUtil {
+    + {static} printTestHeader(testName: String)
+  }
+}
+
+TwoDayPackage -up-|> Package
+OvernightPackage -up-|> Package
+Package o-- "sender" ParcelContact
+Package o-- "recipient" ParcelContact
+
+ParcelExpressSystem --> MenuDisplay : 使用
+ParcelExpressSystem --> PackageManager : 使用
+ParcelExpressSystem --> InputHandler : 使用
+PackageManager --> Package : 创建和管理
+PackageManager --> TwoDayPackage : 创建和管理
+PackageManager --> OvernightPackage : 创建和管理
+PackageManager --> PackageInfoDisplay : 使用
+PackageManager --> InputHandler : 使用
+InputHandler --> ParcelContact : 创建
+PackageInfoDisplay --> Package : 显示
+
+PackageTest ..> Package : 测试
+ParcelContactTest ..> ParcelContact : 测试
+ParcelServiceTest ..> ParcelExpressSystem : 测试
+
+note right of Package::calculateCost
+  计算公式: weight × COST_PER_OUNCE
+end note
+
+note right of TwoDayPackage::calculateCost
+  计算公式: weight × COST_PER_OUNCE + flatFlee
+end note
+
+note right of OvernightPackage::calculateCost
+  计算公式: weight × (COST_PER_OUNCE + overnightFeePerOunce)
+end note
+
+note top of "src.test.java.ParcelPost"
+  测试类使用JUnit 5框架
+end note
+
+@enduml 

@@ -68,4 +68,13 @@ public class Package {
         return this.packageWeight * COST_PER_OUNCE;
     }
 
+    /**
+     * 重置订单计数器
+     * <p>
+     * 此方法主要用于测试目的，用于重置静态计数器，防止进行 Maven test 时计数器在内存中累计。
+     */
+    public static void resetOrderCount() {
+        numberOfShippingOrder = 0;
+    }
+
 }
