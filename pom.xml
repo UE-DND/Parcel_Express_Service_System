@@ -63,7 +63,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ParcelPost.ParcelExpressSystem</mainClass>
+                            <mainClass>com.uednd.parcelpost.ParcelExpressSystem</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

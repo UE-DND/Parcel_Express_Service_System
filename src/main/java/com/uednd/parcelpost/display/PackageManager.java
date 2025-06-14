@@ -1,9 +1,9 @@
-package ParcelPost.display;
+package com.uednd.parcelpost.display;
 
-import ParcelPost.model.Package;
-import ParcelPost.model.TwoDayPackage;
-import ParcelPost.model.OvernightPackage;
-import ParcelPost.model.ParcelContact;
+import com.uednd.parcelpost.model.Package;
+import com.uednd.parcelpost.model.TwoDayPackage;
+import com.uednd.parcelpost.model.OvernightPackage;
+import com.uednd.parcelpost.model.ParcelContact;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -88,7 +88,7 @@ public class PackageManager {
         try {
             MenuDisplay.displayPackageListHeader(packages.size());
             
-            if (packages.size() == 0) {
+            if (packages.isEmpty()) {
                 scanner.nextLine();
                 return;
             }
@@ -110,7 +110,6 @@ public class PackageManager {
                     System.exit(1);
                 }
             }
-            
             System.out.print(MenuDisplay.YELLOW + "\n按回车键继续..." + MenuDisplay.RESET);
             scanner.nextLine();
         } catch (Exception e) {

@@ -107,9 +107,14 @@ OvernightPackage package3 = new OvernightPackage("James Harden", "#13 Oak St",
 ```
 
 ## 项目结构
-- 包名：ParcelPost
+- 包名：com.uednd.parcelpost
 - 类名：
-  - Package.java
-  - TwoDayPackage.java
-  - OvernightPackage.java
-  - TestParcelPost.java
+  - model.Package.java
+  - model.TwoDayPackage.java
+  - model.OvernightPackage.java
+  - model.ParcelContact.java
+  - display.MenuDisplay.java
+  - display.InputHandler.java
+  - display.PackageManager.java
+  - display.PackageInfoDisplay.java
+  - ParcelExpressSystem.java

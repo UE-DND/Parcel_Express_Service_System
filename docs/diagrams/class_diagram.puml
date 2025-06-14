@@ -21,9 +21,9 @@ skinparam note {
   BorderColor #000000
 }
 
-title Maven项目: parcel-express-service-system - 类图
+title Parcel_Express_Service_System - 类图
 
-package "src.main.java.ParcelPost.model" {
+package "com.uednd.parcelpost.model" {
   class Package {
     - sender: ParcelContact
     - recipient: ParcelContact
@@ -38,6 +38,7 @@ package "src.main.java.ParcelPost.model" {
     + getPackageWeight(): double
     + setPackageWeight(packageWeight: double): void
     + {static} getNumberOfShippingOrder(): int
+    + {static} resetOrderCount(): void
     + calculateCost(): double
   }
   
@@ -80,7 +81,7 @@ package "src.main.java.ParcelPost.model" {
   }
 }
 
-package "src.main.java.ParcelPost.display" {
+package "com.uednd.parcelpost.display" {
   class MenuDisplay {
     + {static} RESET: String
     + {static} BOLD: String
@@ -91,7 +92,6 @@ package "src.main.java.ParcelPost.display" {
     + {static} WHITE: String
     + {static} displayMainMenu(): void
     + {static} displayAddPackageMenu(): void
-    + {static} displayTestCaseMenu(): void
     + {static} displayPackageListHeader(packageCount: int): void
     - {static} displayEmptyPackageList(): void
     - {static} displayNonEmptyPackageList(packageCount: int): void
@@ -114,11 +114,10 @@ package "src.main.java.ParcelPost.display" {
     + {static} addPackage(packages: ArrayList<Package>, scanner: Scanner): void
     + {static} displayAllPackages(packages: ArrayList<Package>, scanner: Scanner): void
     + {static} displayTotalOrders(scanner: Scanner): void
-    + {static} addTestCases(packages: ArrayList<Package>, scanner: Scanner): void
   }
 }
 
-package "src.main.java.ParcelPost" {
+package "com.uednd.parcelpost" {
   class ParcelExpressSystem {
     - {static} packages: ArrayList<Package>
     - {static} scanner: Scanner
@@ -126,24 +125,24 @@ package "src.main.java.ParcelPost" {
   }
 }
 
-package "src.test.java.ParcelPost" {
+package "com.uednd.parcelpost.test" {
   class PackageTest {
-    + testCalculateCost()
-    + testConstructor()
-    + testNumberOfShippingOrder()
+    + testPackage()
+    + testTwoDayPackage()
+    + testOvernightPackage()
+    + testOrderCount()
   }
   
   class ParcelContactTest {
-    + testConstructor()
-    + testGettersAndSetters()
+    + testGetterAndSetter()
+    + testToString()
   }
   
-  class ParcelServiceTest {
-    + testSystemFlow()
-  }
-  
-  class PrintUtil {
-    + {static} printTestHeader(testName: String)
+  class UseTestCases {
+    + testParcelService()
+    + {static} printShippingOrderInfo(p: Package): void
+    + {static} printTotalOrderCount(): void
+    + {static} main(args: String[]): void
   }
 }
 
@@ -165,7 +164,8 @@ PackageInfoDisplay --> Package : 显示
 
 PackageTest ..> Package : 测试
 ParcelContactTest ..> ParcelContact : 测试
-ParcelServiceTest ..> ParcelExpressSystem : 测试
+UseTestCases ..> ParcelExpressSystem : 测试
+UseTestCases ..> Package : 使用
 
 note right of Package::calculateCost
   计算公式: weight × COST_PER_OUNCE
@@ -179,7 +179,7 @@ note right of OvernightPackage::calculateCost
   计算公式: weight × (COST_PER_OUNCE + overnightFeePerOunce)
 end note
 
-note top of "src.test.java.ParcelPost"
+note top of "com.uednd.parcelpost.test"
   测试类使用JUnit 5框架
 end note
 

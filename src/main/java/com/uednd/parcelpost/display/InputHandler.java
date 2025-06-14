@@ -1,6 +1,6 @@
-package ParcelPost.display;
+package com.uednd.parcelpost.display;
 
-import ParcelPost.model.ParcelContact;
+import com.uednd.parcelpost.model.ParcelContact;
 import java.util.Scanner;
 
 /**

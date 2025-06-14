@@ -1,4 +1,4 @@
-package ParcelPost;
+package com.uednd.parcelpost;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,13 +7,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import ParcelPost.model.Package;
-import ParcelPost.model.TwoDayPackage;
-import ParcelPost.model.OvernightPackage;
-import ParcelPost.model.ParcelContact;
+import com.uednd.parcelpost.model.Package;
+import com.uednd.parcelpost.model.TwoDayPackage;
+import com.uednd.parcelpost.model.OvernightPackage;
+import com.uednd.parcelpost.model.ParcelContact;
 
 /**
  * 包裹类的单元测试
+ * 
+ * @version 1.0
+ * @since 2025-06-14
  */
 public class PackageTest {
     private ParcelContact sender1, recipient1;

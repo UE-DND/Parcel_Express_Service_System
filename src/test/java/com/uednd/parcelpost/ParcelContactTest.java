@@ -1,15 +1,18 @@
-package ParcelPost;
+package com.uednd.parcelpost;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import ParcelPost.model.ParcelContact;
+import com.uednd.parcelpost.model.ParcelContact;
 
 /**
  * ParcelContact类单元测试
  * 测试 Lombok 能不能用
+ * 
+ * @version 1.0
+ * @since 2025-06-14
  */
 public class ParcelContactTest {
     

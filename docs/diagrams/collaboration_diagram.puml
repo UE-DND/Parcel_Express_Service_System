@@ -1,5 +1,10 @@
 @startuml 包裹快递服务系统协作图
 
+' 包结构说明:
+' - 主类: com.uednd.parcelpost.ParcelExpressSystem
+' - 模型类: com.uednd.parcelpost.model.*
+' - 显示类: com.uednd.parcelpost.display.*
+
 skinparam backgroundColor white
 skinparam handwritten false
 skinparam defaultFontName Microsoft YaHei
@@ -14,15 +19,15 @@ skinparam object {
 }
 
 object "用户" as user
-object "ParcelExpressSystem" as main
-object "MenuDisplay" as menu
-object "InputHandler" as input
-object "PackageManager" as manager
-object "PackageInfoDisplay" as display
-object "Package" as package
-object "TwoDayPackage" as twoDay
-object "OvernightPackage" as overnight
-object "ParcelContact" as contact
+object "ParcelExpressSystem\\n<package: com.uednd.parcelpost>" as main
+object "MenuDisplay\\n<package: com.uednd.parcelpost.display>" as menu
+object "InputHandler\\n<package: com.uednd.parcelpost.display>" as input
+object "PackageManager\\n<package: com.uednd.parcelpost.display>" as manager
+object "PackageInfoDisplay\\n<package: com.uednd.parcelpost.display>" as display
+object "Package\\n<package: com.uednd.parcelpost.model>" as package
+object "TwoDayPackage\\n<package: com.uednd.parcelpost.model>" as twoDay
+object "OvernightPackage\\n<package: com.uednd.parcelpost.model>" as overnight
+object "ParcelContact\\n<package: com.uednd.parcelpost.model>" as contact
 
 user -right-> main : "1: 启动系统"
 user -right-> main : "4: 选择菜单选项"
@@ -51,6 +56,22 @@ note bottom of manager
   3. 用户选择操作
   4. 系统根据选择执行相应功能
   5. 创建、显示或管理包裹对象
+end note
+
+note right of contact
+  包结构图示:
+  com.uednd.parcelpost
+    ├── ParcelExpressSystem (主类)
+    ├── display
+    │    ├── MenuDisplay
+    │    ├── InputHandler
+    │    ├── PackageManager
+    │    └── PackageInfoDisplay
+    └── model
+         ├── Package
+         ├── TwoDayPackage
+         ├── OvernightPackage
+         └── ParcelContact
 end note
 
 @enduml 

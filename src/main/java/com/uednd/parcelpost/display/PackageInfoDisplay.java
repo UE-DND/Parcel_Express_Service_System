@@ -1,9 +1,9 @@
-package ParcelPost.display;
+package com.uednd.parcelpost.display;
 
-import ParcelPost.model.Package;
-import ParcelPost.model.TwoDayPackage;
-import ParcelPost.model.OvernightPackage;
-import ParcelPost.model.ParcelContact;
+import com.uednd.parcelpost.model.Package;
+import com.uednd.parcelpost.model.TwoDayPackage;
+import com.uednd.parcelpost.model.OvernightPackage;
+import com.uednd.parcelpost.model.ParcelContact;
 
 /**
  * 包裹信息显示类

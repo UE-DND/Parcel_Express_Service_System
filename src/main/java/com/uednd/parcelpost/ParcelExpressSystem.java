@@ -1,7 +1,7 @@
-package ParcelPost;
+package com.uednd.parcelpost;
 
-import ParcelPost.display.*;
-import ParcelPost.model.Package;
+import com.uednd.parcelpost.display.*;
+import com.uednd.parcelpost.model.Package;
 import java.util.ArrayList;
 import java.util.Scanner;
 

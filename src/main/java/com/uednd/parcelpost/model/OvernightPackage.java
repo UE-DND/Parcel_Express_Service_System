@@ -1,4 +1,4 @@
-package ParcelPost.model;
+package com.uednd.parcelpost.model;
 
 import lombok.*;
 

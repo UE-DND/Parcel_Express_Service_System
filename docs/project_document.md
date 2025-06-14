@@ -2,27 +2,32 @@
 
 ## 目录
 
-- [1. 系统功能概述](#1-系统功能概述)
-  - [1.1 主要功能](#11-主要功能)
-  - [1.2 功能流程图](#12-功能流程图)
-- [2. 系统算法说明](#2-系统算法说明)
-  - [2.1 包裹费用计算算法](#21-包裹费用计算算法)
-  - [2.2 输入验证算法](#22-输入验证算法)
-- [3. 系统内部逻辑组织结构](#3-系统内部逻辑组织结构)
-  - [3.1 总体结构](#31-总体结构)
-  - [3.2 模型层（Model）](#32-模型层model)
-  - [3.3 显示层（Display）](#33-显示层display)
-  - [3.4 主程序（ParcelExpressSystem）](#34-主程序parcelexpresssystem)
-  - [3.5 Maven 项目结构](#35-maven-项目结构)
-- [4. 系统总体方案](#4-系统总体方案)
-  - [4.1 系统架构](#41-系统架构)
-  - [4.2 类图](#42-类图)
-  - [4.3 状态图](#43-状态图)
-  - [4.4 时序图](#44-时序图)
-  - [4.5 协作图](#45-协作图)
-  - [4.6 系统交互流程](#46-系统交互流程)
-  - [4.7 系统扩展性](#47-系统扩展性)
-  - [4.8 Maven 构建和依赖管理](#48-maven-构建和依赖管理)
+- [包裹快递服务系统项目文档](#包裹快递服务系统项目文档)
+  - [目录](#目录)
+  - [1. 系统功能概述](#1-系统功能概述)
+    - [1.1 主要功能](#11-主要功能)
+    - [1.2 功能流程图](#12-功能流程图)
+  - [2. 系统算法说明](#2-系统算法说明)
+    - [2.1 包裹费用计算算法](#21-包裹费用计算算法)
+    - [2.2 输入验证算法](#22-输入验证算法)
+  - [3. 系统内部逻辑组织结构](#3-系统内部逻辑组织结构)
+    - [3.1 总体结构](#31-总体结构)
+    - [3.2 模型层（Model）](#32-模型层model)
+    - [3.3 显示层（Display）](#33-显示层display)
+    - [3.4 主程序（ParcelExpressSystem）](#34-主程序parcelexpresssystem)
+    - [3.5 Maven 项目结构](#35-maven-项目结构)
+  - [4. 系统总体方案](#4-系统总体方案)
+    - [4.1 系统架构](#41-系统架构)
+    - [4.2 类图](#42-类图)
+    - [4.3 状态图](#43-状态图)
+    - [4.4 时序图](#44-时序图)
+    - [4.5 协作图](#45-协作图)
+    - [4.6 系统交互流程](#46-系统交互流程)
+    - [4.7 系统扩展性](#47-系统扩展性)
+    - [4.8 Maven 构建和依赖管理](#48-maven-构建和依赖管理)
+      - [Maven 配置](#maven-配置)
+      - [主要依赖](#主要依赖)
+      - [构建插件](#构建插件)
 
 ## 1. 系统功能概述
 
@@ -179,25 +184,28 @@ parcel-express-service-system/
 ├── src/
 │   ├── main/
 │   │   └── java/
-│   │       └── ParcelPost/
-│   │           ├── model/
-│   │           │   ├── Package.java
-│   │           │   ├── TwoDayPackage.java
-│   │           │   ├── OvernightPackage.java
-│   │           │   └── ParcelContact.java
-│   │           ├── display/
-│   │           │   ├── MenuDisplay.java
-│   │           │   ├── InputHandler.java
-│   │           │   ├── PackageManager.java
-│   │           │   └── PackageInfoDisplay.java
-│   │           └── ParcelExpressSystem.java
+│   │       └── com/
+│   │           └── uednd/
+│   │               └── parcelpost/
+│   │                   ├── model/
+│   │                   │   ├── Package.java
+│   │                   │   ├── TwoDayPackage.java
+│   │                   │   ├── OvernightPackage.java
+│   │                   │   └── ParcelContact.java
+│   │                   ├── display/
+│   │                   │   ├── MenuDisplay.java
+│   │                   │   ├── InputHandler.java
+│   │                   │   ├── PackageManager.java
+│   │                   │   └── PackageInfoDisplay.java
+│   │                   └── ParcelExpressSystem.java
 │   └── test/
 │       └── java/
-│           └── ParcelPost/
-│               ├── PackageTest.java
-│               ├── ParcelContactTest.java
-│               ├── ParcelServiceTest.java
-│               └── PrintUtil.java
+│           └── com/
+│               └── uednd/
+│                   └── parcelpost/
+│                       ├── PackageTest.java
+│                       ├── ParcelContactTest.java
+│                       └── UseTestCases.java
 ├── target/        # Maven构建输出目录
 ├── docs/
 │   ├── diagrams/  # UML图表
@@ -292,8 +300,8 @@ parcel-express-service-system/
 项目的 `pom.xml` 文件定义了以下主要配置：
 
 ```xml
-<groupId>com.parcelservice</groupId>
-<artifactId>parcel-express-service-system</artifactId>
+<groupId>com.uednd</groupId>
+<artifactId>Parcel_Express_Service_System</artifactId>
 <version>1.0.0</version>
 ```
 
@@ -354,7 +362,7 @@ parcel-express-service-system/
        <configuration>
            <archive>
                <manifest>
-                   <mainClass>ParcelPost.ParcelExpressSystem</mainClass>
+                   <mainClass>com.uednd.parcelpost.ParcelExpressSystem</mainClass>
                </manifest>
            </archive>
        </configuration>

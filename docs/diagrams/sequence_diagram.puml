@@ -20,19 +20,23 @@ skinparam sequence {
 }
 
 actor 用户
-participant "ParcelExpressSystem" as Main
-participant "MenuDisplay" as Menu
-participant "InputHandler" as Input
-participant "PackageManager" as Manager
-participant "PackageInfoDisplay" as Display
-participant "Package" as Package
-participant "TwoDayPackage" as TwoDay
-participant "OvernightPackage" as Overnight
-participant "ParcelContact" as Contact
+participant "com.uednd.parcelpost.ParcelExpressSystem" as Main
+participant "com.uednd.parcelpost.display.MenuDisplay" as Menu
+participant "com.uednd.parcelpost.display.InputHandler" as Input
+participant "com.uednd.parcelpost.display.PackageManager" as Manager
+participant "com.uednd.parcelpost.display.PackageInfoDisplay" as Display
+participant "com.uednd.parcelpost.model.Package" as Package
+participant "com.uednd.parcelpost.model.TwoDayPackage" as TwoDay
+participant "com.uednd.parcelpost.model.OvernightPackage" as Overnight
+participant "com.uednd.parcelpost.model.ParcelContact" as Contact
 
 == 系统启动 ==
 用户 -> Main: 启动系统
 activate Main
+Main -> Menu: clearScreen()
+activate Menu
+Menu --> Main: 清空控制台
+deactivate Menu
 Main -> Menu: displayMainMenu()
 activate Menu
 Menu --> Main: 显示主菜单
@@ -59,6 +63,12 @@ deactivate Input
 
 Manager -> Input: getContactInfo(scanner)
 activate Input
+Input -> Input: getValidInput(scanner, "姓名", "姓名不能为空")
+Input -> Input: getValidInput(scanner, "地址", "地址不能为空")
+Input -> Input: getValidInput(scanner, "城市", "城市不能为空")
+Input -> Input: getValidInput(scanner, "州/省", "州/省不能为空")
+Input -> Input: getValidInput(scanner, "邮编", "邮编不能为空")
+Input -> Input: getValidInput(scanner, "电话", "电话不能为空")
 Input -> Contact: new ParcelContact(...)
 activate Contact
 Contact --> Input: 返回发件人对象
@@ -68,6 +78,12 @@ deactivate Input
 
 Manager -> Input: getContactInfo(scanner)
 activate Input
+Input -> Input: getValidInput(scanner, "姓名", "姓名不能为空")
+Input -> Input: getValidInput(scanner, "地址", "地址不能为空")
+Input -> Input: getValidInput(scanner, "城市", "城市不能为空")
+Input -> Input: getValidInput(scanner, "州/省", "州/省不能为空")
+Input -> Input: getValidInput(scanner, "邮编", "邮编不能为空")
+Input -> Input: getValidInput(scanner, "电话", "电话不能为空")
 Input -> Contact: new ParcelContact(...)
 activate Contact
 Contact --> Input: 返回收件人对象
@@ -105,6 +121,11 @@ else 隔夜达包裹
   deactivate Overnight
 end
 
+Manager -> Menu: clearScreen()
+activate Menu
+Menu --> Manager: 清空控制台
+deactivate Menu
+
 Manager -> Display: printShippingOrderInfo(newPackage)
 activate Display
 Display --> Manager: 显示包裹信息
@@ -123,6 +144,7 @@ Main -> Manager: displayAllPackages(packages, scanner)
 activate Manager
 Manager -> Menu: displayPackageListHeader(packages.size())
 activate Menu
+Menu -> Menu: displayEmptyPackageList() 或 displayNonEmptyPackageList(packageCount)
 Menu --> Manager: 显示包裹列表头部
 deactivate Menu
 
@@ -154,8 +176,6 @@ Menu --> Manager: 显示订单统计信息
 deactivate Menu
 Manager --> Main: 返回主菜单
 deactivate Manager
-
-
 
 == 退出系统 ==
 用户 -> Main: 选择4(退出系统)

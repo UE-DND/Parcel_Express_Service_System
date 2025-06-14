@@ -1,4 +1,4 @@
-package ParcelPost.display;
+package com.uednd.parcelpost.display;
 
 /**
  * 菜单显示类
