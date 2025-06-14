@@ -88,7 +88,7 @@ public class PackageManager {
         try {
             MenuDisplay.displayPackageListHeader(packages.size());
             
-            if (packages.size() == 0) {
+            if (packages.isEmpty()) {
                 scanner.nextLine();
                 return;
             }
@@ -110,7 +110,6 @@ public class PackageManager {
                     System.exit(1);
                 }
             }
-            
             System.out.print(MenuDisplay.YELLOW + "\n按回车键继续..." + MenuDisplay.RESET);
             scanner.nextLine();
         } catch (Exception e) {

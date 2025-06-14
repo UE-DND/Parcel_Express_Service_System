@@ -140,10 +140,8 @@ package "src.test.java.ParcelPost" {
   
   class ParcelServiceTest {
     + testSystemFlow()
-  }
-  
-  class PrintUtil {
-    + {static} printTestHeader(testName: String)
+    + {static} printShippingOrderInfo(p: Package): void
+    + {static} printTotalOrderCount(): void
   }
 }
 
@@ -166,6 +164,7 @@ PackageInfoDisplay --> Package : 显示
 PackageTest ..> Package : 测试
 ParcelContactTest ..> ParcelContact : 测试
 ParcelServiceTest ..> ParcelExpressSystem : 测试
+ParcelServiceTest ..> Package : 使用
 
 note right of Package::calculateCost
   计算公式: weight × COST_PER_OUNCE

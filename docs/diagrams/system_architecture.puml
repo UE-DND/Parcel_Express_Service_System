@@ -103,10 +103,8 @@ package "Maven项目: parcel-express-service-system" {
       
       class ParcelServiceTest {
         + testSystemFlow()
-      }
-      
-      class PrintUtil {
-        + printTestHeader()
+        + printShippingOrderInfo()  // 原PrintUtil功能
+        + printTotalOrderCount()    // 原PrintUtil功能
       }
     }
   }

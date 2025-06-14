@@ -14,6 +14,9 @@ import ParcelPost.model.ParcelContact;
 
 /**
  * 包裹类的单元测试
+ * 
+ * @version 1.0
+ * @since 2025-06-14
  */
 public class PackageTest {
     private ParcelContact sender1, recipient1;

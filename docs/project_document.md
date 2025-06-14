@@ -196,8 +196,7 @@ parcel-express-service-system/
 │           └── ParcelPost/
 │               ├── PackageTest.java
 │               ├── ParcelContactTest.java
-│               ├── ParcelServiceTest.java
-│               └── PrintUtil.java
+│               └── ParcelServiceTest.java   # 包含了原PrintUtil.java的功能
 ├── target/        # Maven构建输出目录
 ├── docs/
 │   ├── diagrams/  # UML图表
