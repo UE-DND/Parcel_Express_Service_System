@@ -27,7 +27,6 @@
     - [4.8 Maven 构建和依赖管理](#48-maven-构建和依赖管理)
       - [Maven 配置](#maven-配置)
       - [主要依赖](#主要依赖)
-      - [构建插件](#构建插件)
 
 ## 1. 系统功能概述
 
@@ -302,71 +301,29 @@ parcel-express-service-system/
 ```xml
 <groupId>com.uednd</groupId>
 <artifactId>Parcel_Express_Service_System</artifactId>
-<version>1.0.0</version>
+<version>1.1.2</version>
 ```
 
 #### 主要依赖
 
 1. **JUnit 5**：用于单元测试
    ```xml
-   <dependency>
-       <groupId>org.junit.jupiter</groupId>
-       <artifactId>junit-jupiter-api</artifactId>
-       <version>5.10.0</version>
-       <scope>test</scope>
-   </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.13.1</version>
+        <scope>test</scope>
+    </dependency>
    ```
 
-2. **Lombok**：简化Java Bean的开发
+2. **Lombok**：
    ```xml
-   <dependency>
-       <groupId>org.projectlombok</groupId>
-       <artifactId>lombok</artifactId>
-       <version>1.18.38</version>
-       <scope>provided</scope>
-   </dependency>
-   ```
-
-#### 构建插件
-
-项目使用以下Maven插件进行构建：
-
-1. **Maven编译插件**：
-   ```xml
-   <plugin>
-       <groupId>org.apache.maven.plugins</groupId>
-       <artifactId>maven-compiler-plugin</artifactId>
-       <version>3.11.0</version>
-       <configuration>
-           <source>1.8</source>
-           <target>1.8</target>
-       </configuration>
-   </plugin>
-   ```
-
-2. **Maven测试插件**：
-   ```xml
-   <plugin>
-       <groupId>org.apache.maven.plugins</groupId>
-       <artifactId>maven-surefire-plugin</artifactId>
-       <version>3.2.2</version>
-   </plugin>
-   ```
-
-3. **Maven打包插件**：
-   ```xml
-   <plugin>
-       <groupId>org.apache.maven.plugins</groupId>
-       <artifactId>maven-jar-plugin</artifactId>
-       <version>3.3.0</version>
-       <configuration>
-           <archive>
-               <manifest>
-                   <mainClass>com.uednd.parcelpost.ParcelExpressSystem</mainClass>
-               </manifest>
-           </archive>
-       </configuration>
-   </plugin>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.38</version>
+        <scope>provided</scope>
+    </dependency>
    ```
 
 使用Maven可以通过简单的命令完成项目的构建、测试和打包：
