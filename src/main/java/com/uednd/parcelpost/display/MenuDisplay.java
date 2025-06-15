@@ -117,7 +117,7 @@ public class MenuDisplay {
      */
     public static void clearScreen() {
         // 打印 100个空行
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 50; i++) {
             System.out.println();
         }
         
